@@ -1,0 +1,15 @@
+INFO:     Will watch for changes in these directories: ['/home/workspace']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [152] using StatReload
+INFO:     Started server process [154]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     172.20.0.1:56890 - "HEAD / HTTP/1.1" 405 Method Not Allowed
+INFO:     172.20.0.1:39644 - "GET /api/balance?client_id=29016a6e-56f1-4b08-80b6-20f06da5b16f HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39644 - "GET /api/transactions?client_id=29016a6e-56f1-4b08-80b6-20f06da5b16f&limit=200 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39644 - "GET /api/categories?client_id=29016a6e-56f1-4b08-80b6-20f06da5b16f HTTP/1.1" 200 OK
+INFO:     172.20.0.1:39644 - "GET /api/reminders?client_id=29016a6e-56f1-4b08-80b6-20f06da5b16f HTTP/1.1" 200 OK
+INFO:     172.20.0.1:60108 - "GET /api/balance?client_id=29016a6e-56f1-4b08-80b6-20f06da5b16f HTTP/1.1" 200 OK
+INFO:     172.20.0.1:60108 - "GET /api/transactions?client_id=29016a6e-56f1-4b08-80b6-20f06da5b16f&limit=200 HTTP/1.1" 200 OK
+INFO:     172.20.0.1:60108 - "GET /api/categories?client_id=29016a6e-56f1-4b08-80b6-20f06da5b16f HTTP/1.1" 200 OK
+INFO:     172.20.0.1:60108 - "GET /api/reminders?client_id=29016a6e-56f1-4b08-80b6-20f06da5b16f HTTP/1.1" 200 OK

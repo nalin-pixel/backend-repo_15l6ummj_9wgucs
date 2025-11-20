@@ -12,37 +12,41 @@ Model name is converted to lowercase for the collection name:
 """
 
 from pydantic import BaseModel, Field
-from typing import Optional
+from typing import Optional, Literal
+from datetime import datetime
 
-# Example schemas (replace with your own):
+# 508 Spendings schemas
 
-class User(BaseModel):
+class Transaction(BaseModel):
     """
-    Users collection schema
-    Collection name: "user" (lowercase of class name)
+    Transactions collection schema
+    Collection: "transaction"
     """
-    name: str = Field(..., description="Full name")
-    email: str = Field(..., description="Email address")
-    address: str = Field(..., description="Address")
-    age: Optional[int] = Field(None, ge=0, le=120, description="Age in years")
-    is_active: bool = Field(True, description="Whether user is active")
+    client_id: str = Field(..., description="Anonymous client identifier")
+    amount: float = Field(..., description="Positive for income, negative for expense")
+    category: str = Field(..., description="Category for the transaction")
+    note: Optional[str] = Field(None, description="Optional note")
+    date: Optional[datetime] = Field(None, description="Datetime of the transaction; defaults to now on backend if not provided")
+    type: Literal["income", "expense"] = Field(..., description="Type of transaction")
 
-class Product(BaseModel):
+class Recurring(BaseModel):
     """
-    Products collection schema
-    Collection name: "product" (lowercase of class name)
+    Recurring payments/contributions
+    Collection: "recurring"
     """
-    title: str = Field(..., description="Product title")
-    description: Optional[str] = Field(None, description="Product description")
-    price: float = Field(..., ge=0, description="Price in dollars")
-    category: str = Field(..., description="Product category")
-    in_stock: bool = Field(True, description="Whether product is in stock")
+    client_id: str
+    label: str
+    amount: float = Field(..., description="Amount each recurrence. Positive for income/savings, negative for expense")
+    category: str
+    frequency: Literal["daily", "weekly", "monthly"] = "monthly"
+    type: Literal["income", "expense"] = "income"
+    next_due_date: Optional[datetime] = None
 
-# Add your own schemas here:
-# --------------------------------------------------
-
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class Share(BaseModel):
+    """
+    Public share tokens mapping to a client_id
+    Collection: "share"
+    """
+    client_id: str
+    token: str
+    created_at: Optional[datetime] = None
